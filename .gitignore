@@ -1,0 +1,7 @@
+node_modules/
+.env
+dataset/*.zip
+trained-models/*.json
+!trained-models/random-forest.json
+!trained-models/evaluation-comparison.json
+npm-debug.log*

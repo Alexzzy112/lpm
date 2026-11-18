@@ -1,0 +1,495 @@
+{
+  "datasetRows": 649,
+  "split": {
+    "seed": 4217,
+    "method": "Stratified 80/20 holdout; fixed class-wise rows",
+    "trainingRows": 517,
+    "testRows": 132,
+    "trainingDistribution": [
+      {
+        "label": "Poor",
+        "count": 80
+      },
+      {
+        "label": "Average",
+        "count": 160
+      },
+      {
+        "label": "Good",
+        "count": 212
+      },
+      {
+        "label": "Excellent",
+        "count": 65
+      }
+    ],
+    "testDistribution": [
+      {
+        "label": "Poor",
+        "count": 20
+      },
+      {
+        "label": "Average",
+        "count": 41
+      },
+      {
+        "label": "Good",
+        "count": 54
+      },
+      {
+        "label": "Excellent",
+        "count": 17
+      }
+    ]
+  },
+  "imbalance": {
+    "largestToSmallestTrainingRatio": 3.2615384615384615,
+    "observation": "The Excellent class has the fewest training records; the majority class has substantially more."
+  },
+  "original": {
+    "algorithm": "Random Forest (41 CART trees)",
+    "metrics": {
+      "accuracy": 0.45454545454545453,
+      "precision": 0.34398411747078217,
+      "recall": 0.35929313459801265,
+      "f1": 0.3452139037433155,
+      "confusionMatrix": [
+        [
+          7,
+          10,
+          3,
+          0
+        ],
+        [
+          3,
+          18,
+          20,
+          0
+        ],
+        [
+          3,
+          16,
+          35,
+          0
+        ],
+        [
+          1,
+          3,
+          13,
+          0
+        ]
+      ],
+      "perClass": [
+        {
+          "label": "Poor",
+          "precision": 0.5,
+          "recall": 0.35,
+          "f1": 0.4117647058823529,
+          "support": 20
+        },
+        {
+          "label": "Average",
+          "precision": 0.3829787234042553,
+          "recall": 0.43902439024390244,
+          "f1": 0.4090909090909091,
+          "support": 41
+        },
+        {
+          "label": "Good",
+          "precision": 0.49295774647887325,
+          "recall": 0.6481481481481481,
+          "f1": 0.56,
+          "support": 54
+        },
+        {
+          "label": "Excellent",
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "support": 17
+        }
+      ]
+    },
+    "confusionMatrix": [
+      [
+        7,
+        10,
+        3,
+        0
+      ],
+      [
+        3,
+        18,
+        20,
+        0
+      ],
+      [
+        3,
+        16,
+        35,
+        0
+      ],
+      [
+        1,
+        3,
+        13,
+        0
+      ]
+    ]
+  },
+  "tuning": {
+    "selectionSplit": "Stratified 80/20 subdivision of training rows only",
+    "selectionMetric": "Macro F1, then Excellent F1, then accuracy",
+    "trials": [
+      {
+        "config": {
+          "balance": "undersample",
+          "maxDepth": 11,
+          "minLeaf": 3,
+          "trees": 61
+        },
+        "metrics": {
+          "accuracy": 0.46153846153846156,
+          "precision": 0.43439826302729523,
+          "recall": 0.4724536001788909,
+          "f1": 0.43334456980825287,
+          "excellent": {
+            "label": "Excellent",
+            "precision": 0.25,
+            "recall": 0.3076923076923077,
+            "f1": 0.27586206896551724,
+            "support": 13
+          }
+        }
+      },
+      {
+        "config": {
+          "balance": "undersample",
+          "maxDepth": 8,
+          "minLeaf": 3,
+          "trees": 61
+        },
+        "metrics": {
+          "accuracy": 0.4326923076923077,
+          "precision": 0.42980320118478016,
+          "recall": 0.48926654740608233,
+          "f1": 0.4222355101157327,
+          "excellent": {
+            "label": "Excellent",
+            "precision": 0.2916666666666667,
+            "recall": 0.5384615384615384,
+            "f1": 0.3783783783783784,
+            "support": 13
+          }
+        }
+      },
+      {
+        "config": {
+          "balance": "undersample",
+          "maxDepth": 8,
+          "minLeaf": 6,
+          "trees": 61
+        },
+        "metrics": {
+          "accuracy": 0.4519230769230769,
+          "precision": 0.4305555555555556,
+          "recall": 0.470455053667263,
+          "f1": 0.4165393569038266,
+          "excellent": {
+            "label": "Excellent",
+            "precision": 0.25,
+            "recall": 0.3076923076923077,
+            "f1": 0.27586206896551724,
+            "support": 13
+          }
+        }
+      },
+      {
+        "config": {
+          "balance": "class-weight",
+          "maxDepth": 11,
+          "minLeaf": 3,
+          "trees": 61
+        },
+        "metrics": {
+          "accuracy": 0.4423076923076923,
+          "precision": 0.40977856659905343,
+          "recall": 0.43759783094812166,
+          "f1": 0.4069854664791373,
+          "excellent": {
+            "label": "Excellent",
+            "precision": 0.17647058823529413,
+            "recall": 0.23076923076923078,
+            "f1": 0.20000000000000004,
+            "support": 13
+          }
+        }
+      },
+      {
+        "config": {
+          "balance": "class-weight",
+          "maxDepth": 5,
+          "minLeaf": 3,
+          "trees": 61
+        },
+        "metrics": {
+          "accuracy": 0.5096153846153846,
+          "precision": 0.3873160173160173,
+          "recall": 0.44785610465116277,
+          "f1": 0.40317627281009044,
+          "excellent": {
+            "label": "Excellent",
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "support": 13
+          }
+        }
+      },
+      {
+        "config": {
+          "balance": "class-weight",
+          "maxDepth": 11,
+          "minLeaf": 6,
+          "trees": 61
+        },
+        "metrics": {
+          "accuracy": 0.46153846153846156,
+          "precision": 0.38982393723773034,
+          "recall": 0.4243906529516995,
+          "f1": 0.3937598925438105,
+          "excellent": {
+            "label": "Excellent",
+            "precision": 0.16666666666666666,
+            "recall": 0.07692307692307693,
+            "f1": 0.10526315789473684,
+            "support": 13
+          }
+        }
+      },
+      {
+        "config": {
+          "balance": "class-weight",
+          "maxDepth": 8,
+          "minLeaf": 3,
+          "trees": 61
+        },
+        "metrics": {
+          "accuracy": 0.4519230769230769,
+          "precision": 0.3773327621903334,
+          "recall": 0.4145796064400716,
+          "f1": 0.38192926709550745,
+          "excellent": {
+            "label": "Excellent",
+            "precision": 0.1,
+            "recall": 0.07692307692307693,
+            "f1": 0.08695652173913043,
+            "support": 13
+          }
+        }
+      },
+      {
+        "config": {
+          "balance": "undersample",
+          "maxDepth": 11,
+          "minLeaf": 6,
+          "trees": 61
+        },
+        "metrics": {
+          "accuracy": 0.4423076923076923,
+          "precision": 0.37380952380952376,
+          "recall": 0.4067671064400716,
+          "f1": 0.3731625024591777,
+          "excellent": {
+            "label": "Excellent",
+            "precision": 0.08333333333333333,
+            "recall": 0.07692307692307693,
+            "f1": 0.08,
+            "support": 13
+          }
+        }
+      },
+      {
+        "config": {
+          "balance": "class-weight",
+          "maxDepth": 8,
+          "minLeaf": 6,
+          "trees": 61
+        },
+        "metrics": {
+          "accuracy": 0.47115384615384615,
+          "precision": 0.3516098484848485,
+          "recall": 0.4304142441860465,
+          "f1": 0.36754317111459966,
+          "excellent": {
+            "label": "Excellent",
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "support": 13
+          }
+        }
+      },
+      {
+        "config": {
+          "balance": "class-weight",
+          "maxDepth": 5,
+          "minLeaf": 6,
+          "trees": 61
+        },
+        "metrics": {
+          "accuracy": 0.4519230769230769,
+          "precision": 0.31892655367231637,
+          "recall": 0.365734011627907,
+          "f1": 0.33401159205820696,
+          "excellent": {
+            "label": "Excellent",
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "support": 13
+          }
+        }
+      },
+      {
+        "config": {
+          "balance": "undersample",
+          "maxDepth": 5,
+          "minLeaf": 3,
+          "trees": 61
+        },
+        "metrics": {
+          "accuracy": 0.33653846153846156,
+          "precision": 0.3573717948717949,
+          "recall": 0.38228141771019675,
+          "f1": 0.32792525478435464,
+          "excellent": {
+            "label": "Excellent",
+            "precision": 0.16666666666666666,
+            "recall": 0.46153846153846156,
+            "f1": 0.2448979591836735,
+            "support": 13
+          }
+        }
+      },
+      {
+        "config": {
+          "balance": "undersample",
+          "maxDepth": 5,
+          "minLeaf": 6,
+          "trees": 61
+        },
+        "metrics": {
+          "accuracy": 0.375,
+          "precision": 0.342479674796748,
+          "recall": 0.3694935152057245,
+          "f1": 0.3211193568336426,
+          "excellent": {
+            "label": "Excellent",
+            "precision": 0.1,
+            "recall": 0.15384615384615385,
+            "f1": 0.12121212121212123,
+            "support": 13
+          }
+        }
+      }
+    ],
+    "selected": {
+      "balance": "undersample",
+      "maxDepth": 11,
+      "minLeaf": 3,
+      "trees": 61
+    }
+  },
+  "improved": {
+    "metrics": {
+      "accuracy": 0.4318181818181818,
+      "precision": 0.42948717948717946,
+      "recall": 0.4565505606036453,
+      "f1": 0.4188042931299327,
+      "confusionMatrix": [
+        [
+          14,
+          4,
+          0,
+          2
+        ],
+        [
+          15,
+          15,
+          6,
+          5
+        ],
+        [
+          10,
+          17,
+          22,
+          5
+        ],
+        [
+          3,
+          3,
+          5,
+          6
+        ]
+      ],
+      "perClass": [
+        {
+          "label": "Poor",
+          "precision": 0.3333333333333333,
+          "recall": 0.7,
+          "f1": 0.45161290322580644,
+          "support": 20
+        },
+        {
+          "label": "Average",
+          "precision": 0.38461538461538464,
+          "recall": 0.36585365853658536,
+          "f1": 0.37499999999999994,
+          "support": 41
+        },
+        {
+          "label": "Good",
+          "precision": 0.6666666666666666,
+          "recall": 0.4074074074074074,
+          "f1": 0.5057471264367817,
+          "support": 54
+        },
+        {
+          "label": "Excellent",
+          "precision": 0.3333333333333333,
+          "recall": 0.35294117647058826,
+          "f1": 0.34285714285714286,
+          "support": 17
+        }
+      ]
+    },
+    "confusionMatrix": [
+      [
+        14,
+        4,
+        0,
+        2
+      ],
+      [
+        15,
+        15,
+        6,
+        5
+      ],
+      [
+        10,
+        17,
+        22,
+        5
+      ],
+      [
+        3,
+        3,
+        5,
+        6
+      ]
+    ]
+  },
+  "decision": "Improved model selected: held-out macro-F1 and Excellent-class F1 both exceeded the original."
+}

@@ -1,0 +1,23 @@
+{
+  "name": "student-performance-learning-behaviour",
+  "version": "1.0.0",
+  "description": "Student academic performance prediction research application",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "data:download": "node server/ml/download-data.js",
+    "model:train": "node server/ml/train.js",
+    "setup": "npm run data:download && npm run model:train"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5"
+  }
+}
