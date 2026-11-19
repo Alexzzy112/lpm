@@ -25,15 +25,14 @@ router.get('/model',(_req,res)=>res.json(modelInfo()?{trained:true,...modelInfo(
 router.post('/auth/register',authLimit,async(req,res,next)=>{try{
   if(!req.app.locals.dbConnected) return res.status(503).json({error:'Database is not configured. Add MONGODB_URI to .env.'});
   const {name,email,password,username}=req.body;
-  if(!name||name.trim().length<2||!/^\S+@\S+\.\S+$/.test(email||'')||typeof password!=='string'||password.length<8) return res.status(400).json({error:'Enter a name, valid email and password with at least 8 characters.'});
+  if(typeof name!=='string'||name.trim().length<2||!/^\S+@\S+\.\S+$/.test(email||'')||typeof password!=='string'||password.length<8||typeof username!=='string'||!/^[a-zA-Z0-9._-]{3,50}$/.test(username.trim())) return res.status(400).json({error:'Enter a name, valid email, username (3–50 letters, numbers, dots, underscores or hyphens), and password with at least 8 characters.'});
   if(await User.exists({email:email.toLowerCase()})) return res.status(409).json({error:'An account with that email already exists.'});
   const role=email.toLowerCase()===process.env.ADMIN_EMAIL?.toLowerCase()?'admin':'student';
-  const assignedStudentId=username.trim();
-  if(await User.exists({studentId:assignedStudentId})) return res.status(409).json({error:'That username is already in use.'});
+  const assignedStudentId=username.trim().toLowerCase();
+  if(await User.exists({studentId:assignedStudentId})) return res.status(409).json({error:'That username is already registered. Try another username.'});
   const approvalStatus='approved';
   const user=await User.create({name:clean(name),email:email.toLowerCase(),passwordHash:await bcrypt.hash(password,12),studentId:assignedStudentId,role,approvalStatus});
   const userInfo={id:user._id,name:user.name,email:user.email,role:user.role,studentId:user.studentId,approvalStatus:user.approvalStatus};
-  if(role==='student') return res.status(201).json({pendingApproval:true,user:userInfo});
   res.status(201).json({token:signToken(user),user:userInfo});
 }catch(e){next(e);}});
 router.post('/auth/login',authLimit,async(req,res,next)=>{try{
